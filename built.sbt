@@ -2,8 +2,10 @@ lazy val callsite =
   (project in file("."))
     .settings(commonSettings, publishSettings)
     .settings(
-      libraryDependencies ++= Seq("org.scala-lang"   % "scala-reflect"    % scalaVersion.value,
-                                  "org.eclipse.jgit" % "org.eclipse.jgit" % "5.0.1.201806211838-r"),
+      libraryDependencies ++= Seq(
+        "org.scala-lang"   % "scala-reflect"    % scalaVersion.value,
+        "org.eclipse.jgit" % "org.eclipse.jgit" % "5.0.2.201807311906-r"
+      ),
       libraryDependencies ++= Seq(
         "org.scalatest" %% "scalatest"   % "3.0.5",
         "org.slf4j"     % "slf4j-simple" % "1.7.25"
@@ -15,7 +17,8 @@ lazy val metadataSettings =
     organization := "io.univalence",
     version := "0.1.0-SNAPSHOT",
     description := "Call site macro",
-    licenses := Seq("The Apache License, Version 2.0" → url("http://www.apache.org/licenses/LICENSE-2.0.txt")),
+    startYear := Some(2018),
+    licenses += ("Apache-2.0" → new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
     developers := List(
       Developer(
         id = "jwinandy",
