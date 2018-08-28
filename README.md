@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/UNIVALENCE/callsite.svg?branch=master)](https://travis-ci.org/UNIVALENCE/callsite)
-[![codecov](https://codecov.io/gh/UNIVALENCE/callsite/branch/master/graph/badge.svg)](https://codecov.io/gh/UNIVALENCE/callsite)
+[![Build Status](https://travis-ci.org/UNIVALENCE/cause-toujours.svg?branch=master)](https://travis-ci.org/UNIVALENCE/cause-toujours)
+[![codecov](https://codecov.io/gh/UNIVALENCE/cause-toujours/branch/master/graph/badge.svg)](https://codecov.io/gh/UNIVALENCE/cause-toujours)
 
-# Call site
+# Cause-toujours
 
-Define a macro that produces information about call site.
+Cause-toujours is a framework that gathers information about code location.

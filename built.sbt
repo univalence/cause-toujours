@@ -1,16 +1,19 @@
 // - Main project settings
-lazy val callsite =
+lazy val causeToujours =
   (project in file("."))
     .settings(commonSettings, publishSettings)
     .settings(
+      name := "cause-toujours"
+    )
+    .settings(
       libraryDependencies ++= Seq(
-        "org.scala-lang"   % "scala-reflect"    % scalaVersion.value,
+        "org.scala-lang" % "scala-reflect" % scalaVersion.value,
         "org.eclipse.jgit" % "org.eclipse.jgit" % "5.0.2.201807311906-r"
       ),
       // -- Test dependencies
       libraryDependencies ++= Seq(
-        "org.scalatest" %% "scalatest"   % "3.0.5",
-        "org.slf4j"     % "slf4j-simple" % "1.7.25"
+        "org.scalatest" %% "scalatest" % "3.0.5",
+        "org.slf4j" % "slf4j-simple" % "1.7.25"
       ).map(_ % Test)
     )
 
@@ -18,7 +21,7 @@ lazy val metadataSettings =
   Def.settings(
     organization := "io.univalence",
     version := "0.1.0-SNAPSHOT",
-    description := "Call site macro",
+    description := "Cause-toujours is a framework that gathers information about code location",
     startYear := Some(2018),
     licenses += ("Apache-2.0" → new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
     developers := List(
@@ -111,7 +114,7 @@ lazy val publishSettings =
 
 lazy val commonSettings =
   Def.settings(metadataSettings,
-               scalaSettings,
-               parallelExecution := false,
-               scalafmtOnCompile in ThisBuild := true,
-               scalafmtTestOnCompile in ThisBuild := true)
+    scalaSettings,
+    parallelExecution := false,
+    scalafmtOnCompile in ThisBuild := true,
+    scalafmtTestOnCompile in ThisBuild := true)
