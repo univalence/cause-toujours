@@ -3,4 +3,4 @@
 
 # Cause-toujours
 
-Cause-toujours is a library that gathers information about code location.
+Cause-toujours is a microframework that gathers information about code location.
