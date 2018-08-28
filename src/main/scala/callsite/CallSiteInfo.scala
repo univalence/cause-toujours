@@ -10,7 +10,7 @@ case class CallSiteInfo(
     fileContent: Option[String] = None //if the build file is different
 )
 
-object Implicit {
+object CallSiteInfo {
   import language.experimental.macros
 
   implicit def callSite: CallSiteInfo = macro CallSiteMacro.callSiteImpl
