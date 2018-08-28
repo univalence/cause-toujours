@@ -1,3 +1,4 @@
+// - Main project settings
 lazy val callsite =
   (project in file("."))
     .settings(commonSettings, publishSettings)
@@ -6,6 +7,7 @@ lazy val callsite =
         "org.scala-lang"   % "scala-reflect"    % scalaVersion.value,
         "org.eclipse.jgit" % "org.eclipse.jgit" % "5.0.2.201807311906-r"
       ),
+      // -- Test dependencies
       libraryDependencies ++= Seq(
         "org.scalatest" %% "scalatest"   % "3.0.5",
         "org.slf4j"     % "slf4j-simple" % "1.7.25"
@@ -43,7 +45,7 @@ lazy val metadataSettings =
       ScmInfo(
         url("https://github.com/UNIVALENCE/Zoom"),
         "scm:git:https://github.com/UNIVALENCE/Zoom.git",
-        Some(s"scm:git:git@github.com:UNIVALENCE/Zoom.git")
+        "scm:git:git@github.com:UNIVALENCE/Zoom.git"
       ))
   )
 
@@ -94,8 +96,16 @@ lazy val scalaSettings =
 
 lazy val publishSettings =
   Def.settings(
+    // -- Settings meant for deployment on oss.sonatype.org
+    sonatypeProfileName := organization.value,
+    isSnapshot := version.value endsWith "SNAPSHOT",
     publishMavenStyle := true,
-    publishTo := Some(sonatypeDefaultResolver.value),
+    publishTo := Some(
+      if (isSnapshot.value)
+        Opts.resolver.sonatypeSnapshots
+      else
+        Opts.resolver.sonatypeStaging)
+    ,
     useGpg := true
   )
 
