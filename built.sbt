@@ -7,13 +7,13 @@ lazy val causeToujours =
     )
     .settings(
       libraryDependencies ++= Seq(
-        "org.scala-lang" % "scala-reflect" % scalaVersion.value,
+        "org.scala-lang"   % "scala-reflect"    % scalaVersion.value,
         "org.eclipse.jgit" % "org.eclipse.jgit" % "5.0.2.201807311906-r"
       ),
       // -- Test dependencies
       libraryDependencies ++= Seq(
-        "org.scalatest" %% "scalatest" % "3.0.5",
-        "org.slf4j" % "slf4j-simple" % "1.7.25"
+        "org.scalatest" %% "scalatest"   % "3.0.5",
+        "org.slf4j"     % "slf4j-simple" % "1.7.25"
       ).map(_ % Test)
     )
 
@@ -109,12 +109,13 @@ lazy val publishSettings =
           Opts.resolver.sonatypeSnapshots
         else
           Opts.resolver.sonatypeStaging),
+    credentials += Credentials(Path.userHome / ".sbt" / "sonatype_credential"),
     useGpg := true
   )
 
 lazy val commonSettings =
   Def.settings(metadataSettings,
-    scalaSettings,
-    parallelExecution := false,
-    scalafmtOnCompile in ThisBuild := true,
-    scalafmtTestOnCompile in ThisBuild := true)
+               scalaSettings,
+               parallelExecution := false,
+               scalafmtOnCompile in ThisBuild := true,
+               scalafmtTestOnCompile in ThisBuild := true)
