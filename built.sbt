@@ -3,9 +3,6 @@ lazy val causeToujours =
   (project in file("."))
     .settings(commonSettings, publishSettings)
     .settings(
-      name := "cause-toujours"
-    )
-    .settings(
       libraryDependencies ++= Seq(
         "org.scala-lang"   % "scala-reflect"    % scalaVersion.value,
         "org.eclipse.jgit" % "org.eclipse.jgit" % "5.0.2.201807311906-r"
@@ -19,11 +16,18 @@ lazy val causeToujours =
 
 lazy val metadataSettings =
   Def.settings(
+    // -- Organization
     organization := "io.univalence",
-    version := "0.1.0-SNAPSHOT",
+    organizationName := "Univalence",
+    organizationHomepage := Some(url("http://univalence.io/")),
+    // -- Project
+    name := "cause-toujours",
+    version := "0.1.0",
     description := "Cause-toujours is a framework that gathers information about code location",
     startYear := Some(2018),
     licenses += ("Apache-2.0" → new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
+    homepage := Some(url("https://github.com/UNIVALENCE/cause-toujours")),
+    // -- Contributors
     developers := List(
       Developer(
         id = "jwinandy",
