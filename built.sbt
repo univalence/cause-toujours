@@ -1,4 +1,4 @@
-// - Main project settings
+// -- Main project settings
 lazy val causeToujours =
   (project in file("."))
     .settings(commonSettings, publishSettings)
@@ -22,8 +22,8 @@ lazy val metadataSettings =
     organizationHomepage := Some(url("http://univalence.io/")),
     // -- Project
     name := "cause-toujours",
-    version := "0.1.0",
-    description := "Cause-toujours is a framework that gathers information about code location",
+    version := "0.1.1-SNAPSHOT",
+    description := "Cause-toujours is a microframework that gathers information about code location",
     startYear := Some(2018),
     licenses += ("Apache-2.0" → new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
     homepage := Some(url("https://github.com/UNIVALENCE/cause-toujours")),
