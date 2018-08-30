@@ -104,16 +104,7 @@ lazy val scalaSettings =
 lazy val publishSettings =
   Def.settings(
     // -- Settings meant for deployment on oss.sonatype.org
-    sonatypeProfileName := organization.value,
-    isSnapshot := version.value endsWith "SNAPSHOT",
-    publishMavenStyle := true,
-    publishTo :=
-      Some(
-        if (isSnapshot.value)
-          Opts.resolver.sonatypeSnapshots
-        else
-          Opts.resolver.sonatypeStaging),
-    credentials += Credentials(Path.userHome / ".sbt" / "sonatype_credential"),
+    publishTo := sonatypePublishTo.value,
     useGpg := true
   )
 
