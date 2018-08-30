@@ -109,8 +109,12 @@ lazy val publishSettings =
   )
 
 lazy val commonSettings =
-  Def.settings(metadataSettings,
-               scalaSettings,
-               parallelExecution := false,
-               scalafmtOnCompile in ThisBuild := true,
-               scalafmtTestOnCompile in ThisBuild := true)
+  Def.settings(
+    metadataSettings,
+    scalaSettings
+  ) ++
+    Def.settings(
+      parallelExecution := false,
+      scalafmtOnCompile in ThisBuild := true,
+      scalafmtTestOnCompile in ThisBuild := true
+    )
