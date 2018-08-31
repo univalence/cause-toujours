@@ -46,6 +46,12 @@ lazy val metadataSettings =
         name = "François Sarradin",
         email = "francois@univalence.io",
         url = url("https://github.com/fsarradin")
+      ),
+      Developer(
+        id = "bernit77",
+        name = "Bernarith Men",
+        email = "bernarith@univalence.io",
+        url = url("https://github.com/bernit77")
       )
     ),
     scmInfo := Some(
