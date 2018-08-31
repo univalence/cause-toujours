@@ -50,9 +50,9 @@ lazy val metadataSettings =
     ),
     scmInfo := Some(
       ScmInfo(
-        url("https://github.com/UNIVALENCE/Zoom"),
-        "scm:git:https://github.com/UNIVALENCE/Zoom.git",
-        "scm:git:git@github.com:UNIVALENCE/Zoom.git"
+        url("https://github.com/UNIVALENCE/cause-toujours"),
+        "scm:git:https://github.com/UNIVALENCE/cause-toujours.git",
+        "scm:git:git@github.com:UNIVALENCE/cause-toujours.git"
       ))
   )
 
