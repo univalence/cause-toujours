@@ -8,14 +8,13 @@ import org.scalatest.{FunSuiteLike, Matchers}
 class ContainerInfoTest extends FunSuiteLike with Matchers {
 
   test("should get container info from the cpuset of the init process") {
-    val data = "/docker/584295459285092095"
+    val data         = "/docker/584295459285092095"
     val cpuset: Path = Files.createTempFile("cpuset", "")
 
     val fw = new FileWriter(cpuset.toFile)
     try {
       fw.write(data)
-    }
-    finally fw.close()
+    } finally fw.close()
 
     val containerInfo: ContainerInfo = ContainerInfo.fromPath(cpuset)
 
