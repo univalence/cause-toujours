@@ -17,41 +17,41 @@ lazy val causeToujours =
 lazy val metadataSettings =
   Def.settings(
     // -- Organization
-    organization := "io.univalence",
-    organizationName := "Univalence",
+    organization         := "io.univalence",
+    organizationName     := "Univalence",
     organizationHomepage := Some(url("http://univalence.io/")),
     // -- Project
-    name := "cause-toujours",
-    version := "0.1.1-SNAPSHOT",
+    name        := "cause-toujours",
+    version     := "0.1.1-SNAPSHOT",
     description := "Cause-toujours is a microframework that gathers information about code location",
-    startYear := Some(2018),
-    licenses += ("Apache-2.0" → new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
-    homepage := Some(url("https://github.com/UNIVALENCE/cause-toujours")),
+    startYear   := Some(2018),
+    licenses    += ("Apache-2.0" → new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
+    homepage    := Some(url("https://github.com/UNIVALENCE/cause-toujours")),
     // -- Contributors
     developers := List(
       Developer(
-        id = "jwinandy",
-        name = "Jonathan Winandy",
+        id    = "jwinandy",
+        name  = "Jonathan Winandy",
         email = "jonathan@univalence.io",
-        url = url("https://github.com/ahoy-jon")
+        url   = url("https://github.com/ahoy-jon")
       ),
       Developer(
-        id = "phong",
-        name = "Philippe Hong",
+        id    = "phong",
+        name  = "Philippe Hong",
         email = "philippe@univalence.io",
-        url = url("https://github.com/hwki77")
+        url   = url("https://github.com/hwki77")
       ),
       Developer(
-        id = "fsarradin",
-        name = "François Sarradin",
+        id    = "fsarradin",
+        name  = "François Sarradin",
         email = "francois@univalence.io",
-        url = url("https://github.com/fsarradin")
+        url   = url("https://github.com/fsarradin")
       ),
       Developer(
-        id = "bernit77",
-        name = "Bernarith Men",
+        id    = "bernit77",
+        name  = "Bernarith Men",
         email = "bernarith@univalence.io",
-        url = url("https://github.com/bernit77")
+        url   = url("https://github.com/bernit77")
       )
     ),
     scmInfo := Some(
@@ -65,7 +65,7 @@ lazy val metadataSettings =
 lazy val scalaSettings =
   Def.settings(
     crossScalaVersions := Seq("2.11.12", "2.12.6"),
-    scalaVersion := crossScalaVersions.value.find(_.startsWith("2.12")).get,
+    scalaVersion       := crossScalaVersions.value.find(_.startsWith("2.12")).get,
     scalacOptions :=
       Opts.compile.encoding("utf-8") // Specify character encoding used by source files (linked to the previous item).
         ++ Seq(
@@ -111,7 +111,7 @@ lazy val publishSettings =
   Def.settings(
     // -- Settings meant for deployment on oss.sonatype.org
     publishTo := sonatypePublishTo.value,
-    useGpg := true
+    useGpg    := true
   )
 
 lazy val commonSettings =
@@ -120,7 +120,7 @@ lazy val commonSettings =
     scalaSettings
   ) ++
     Def.settings(
-      parallelExecution := false,
-      scalafmtOnCompile in ThisBuild := true,
+      parallelExecution                  := false,
+      scalafmtOnCompile in ThisBuild     := true,
       scalafmtTestOnCompile in ThisBuild := true
     )
