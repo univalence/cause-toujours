@@ -9,9 +9,9 @@ lazy val causeToujours =
       ),
       // -- Test dependencies
       libraryDependencies ++= Seq(
-        "org.scalatest" %% "scalatest"   % "3.0.5",
-        "org.slf4j"     % "slf4j-simple" % "1.7.25"
-      ).map(_ % Test)
+        "org.scalatest" %% "scalatest"   % "3.0.5"  % Test,
+        "org.slf4j"     % "slf4j-simple" % "1.7.25" % Test
+      )
     )
 
 lazy val metadataSettings =
