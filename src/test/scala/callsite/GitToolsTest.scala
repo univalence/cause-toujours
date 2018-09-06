@@ -2,7 +2,7 @@ package callsite
 
 import java.io.File
 import java.nio.charset.StandardCharsets
-import java.nio.file.{Files, Path}
+import java.nio.file.{FileSystems, Files, Path}
 
 import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.revwalk.RevCommit
@@ -98,13 +98,14 @@ class GitToolsTest extends FunSuiteLike with Matchers {
   }
 
   test("should get a path to root of the repo from a file") {
-    val dir = root.resolve("a/b/c/d").toFile
-    dir.mkdirs()
+    val subPath = FileSystems.getDefault.getPath("a", "b", "c", "d")
+    val dir     = root.resolve(subPath)
+    dir.toFile.mkdirs()
 
-    val file = root.resolve("a/b/c/d/e.txt").toFile
+    val file = dir.resolve("e.txt").toFile
     file.createNewFile()
 
-    pathToRepoRoot(file) should be("a/b/c/d/e.txt")
+    pathToRepoRoot(file) should be(FileSystems.getDefault.getPath("a", "b", "c", "d", "e.txt").toString)
   }
 
 }
