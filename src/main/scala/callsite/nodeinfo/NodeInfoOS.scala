@@ -1,4 +1,4 @@
-package callsite
+package callsite.nodeinfo
 
 import java.lang.management.ManagementFactory
 
@@ -10,13 +10,16 @@ case class NodeInfoOS(
 )
 
 object NodeInfoOS {
+
   def nodeInfoOS: NodeInfoOS = {
     val os = ManagementFactory.getOperatingSystemMXBean
+
     NodeInfoOS(
-      os.getAvailableProcessors,
-      os.getArch,
-      os.getName,
-      os.getVersion
+      processors = os.getAvailableProcessors,
+      osArch     = os.getArch,
+      osName     = os.getName,
+      osVersion  = os.getVersion
     )
   }
+
 }

@@ -1,6 +1,7 @@
-package callsite
+package callsite.nodeinfo
 
 import java.lang.management.ManagementFactory
+
 import scala.collection.JavaConverters._
 
 case class NodeInfoRuntime(
@@ -16,19 +17,21 @@ case class NodeInfoRuntime(
 )
 
 object NodeInfoRuntime {
+
   def nodeInfoRuntime: NodeInfoRuntime = {
     val runtime = ManagementFactory.getRuntimeMXBean
 
     NodeInfoRuntime(
       runtime.getName,
-      runtime.getInputArguments.asScala.toString(),
-      runtime.getUptime,
-      runtime.getVmName,
-      runtime.getVmVendor,
-      runtime.getVmVersion,
-      runtime.getSpecName,
-      runtime.getSpecVendor,
-      runtime.getManagementSpecVersion
+      runtimeInputArgs   = runtime.getInputArguments.asScala.toString(),
+      runtimeUptime      = runtime.getUptime,
+      runtimeVMName      = runtime.getVmName,
+      runtimeVMVendor    = runtime.getVmVendor,
+      runtimeVMVersion   = runtime.getVmVersion,
+      runtimeSpecName    = runtime.getSpecName,
+      runtimeSpecVendor  = runtime.getSpecVendor,
+      runtimeSpecVersion = runtime.getManagementSpecVersion
     )
   }
+
 }
