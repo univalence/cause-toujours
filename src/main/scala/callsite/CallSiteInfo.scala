@@ -6,7 +6,8 @@ case class CallSiteInfo(
     line: Int, //line in file
     commit: String, //id of the commit
     buildAt: Long, //time you build at
-    clean: Boolean, //if the built file is clean compare to git version
+    status: String, //one of "clean", "modified", "untracked"
+    fingerprint: String, //file content hash
     fileContent: Option[String] = None //if the build file is different
 )
 

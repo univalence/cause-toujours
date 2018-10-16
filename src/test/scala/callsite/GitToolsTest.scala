@@ -3,6 +3,7 @@ package callsite
 import java.io.File
 import java.nio.charset.StandardCharsets
 import java.nio.file.{FileSystems, Files, Path}
+import java.util.UUID
 
 import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.revwalk.RevCommit
@@ -29,39 +30,42 @@ class GitToolsTest extends FunSuiteLike with Matchers {
     maybeGit should be(defined)
   }
 
-  test("a new file should not be clean") {
-    val file: File = root.resolve("newFile").toFile
+  test("a new file should be untracked") {
+    val file: File = root.resolve(newFileName).toFile
 
     file.createNewFile()
 
-    isClean(file) should be(false)
+    fileStatus(file) should be(Untracked)
   }
 
   test("a committed new file should be clean") {
-    val file: File = root.resolve("newFile").toFile
+    val fileName   = newFileName
+    val file: File = root.resolve(fileName).toFile
 
     file.createNewFile()
-    git.add().addFilepattern("newFile").call()
+    git.add().addFilepattern(fileName).call()
     git.commit().setMessage("commit message yolo").call()
 
-    isClean(file) should be(true)
+    fileStatus(file) should be(Clean)
   }
 
-  test("a committed then modified new file should not be clean") {
-    val file: File = root.resolve("newFile").toFile
+  test("a committed new file then modified should be modified") {
+    val fileName   = newFileName
+    val file: File = root.resolve(fileName).toFile
 
     file.createNewFile()
-    git.add().addFilepattern("newFile").call()
+    git.add().addFilepattern(fileName).call()
     git.commit().setMessage("commit message yolo").call()
     Files.write(file.toPath, "file contents".getBytes(StandardCharsets.UTF_8))
 
-    isClean(file) should be(false)
+    fileStatus(file) should be(Modified)
   }
 
   test("should get last commit id from a new committed file") {
-    val file: File = root.resolve("newFile").toFile
+    val fileName   = newFileName
+    val file: File = root.resolve(fileName).toFile
     file.createNewFile()
-    git.add().addFilepattern("newFile")
+    git.add().addFilepattern(fileName)
     val initialCommit: RevCommit =
       git.commit().setMessage("commit message yolo 1").call()
 
@@ -71,9 +75,10 @@ class GitToolsTest extends FunSuiteLike with Matchers {
   test(
     "should get last commit id from a committed file even after some modifications on this file"
   ) {
-    val file: File = root.resolve("newFile").toFile
+    val fileName   = newFileName
+    val file: File = root.resolve(fileName).toFile
     file.createNewFile()
-    git.add().addFilepattern("newFile")
+    git.add().addFilepattern(fileName)
     val initialCommit: RevCommit =
       git.commit().setMessage("commit message yolo 1").call()
 
@@ -83,9 +88,10 @@ class GitToolsTest extends FunSuiteLike with Matchers {
   }
 
   test("should get last commit id after committed a file twice") {
-    val file: File = root.resolve("newFile").toFile
+    val fileName   = newFileName
+    val file: File = root.resolve(fileName).toFile
     file.createNewFile()
-    git.add().addFilepattern("newFile")
+    git.add().addFilepattern(fileName)
     val initialCommit: RevCommit =
       git.commit().setMessage("commit message yolo 1").call()
 
@@ -107,5 +113,15 @@ class GitToolsTest extends FunSuiteLike with Matchers {
 
     pathToRepoRoot(file) should be(FileSystems.getDefault.getPath("a", "b", "c", "d", "e.txt").toString)
   }
+
+  test("should compute hash of a file") {
+    val file: File = root.resolve(newFileName).toFile
+
+    file.createNewFile()
+
+    hashObject(file) should be("e69de29bb2d1d6434b8b29ae775ad8c2e48c5391")
+  }
+
+  def newFileName: String = "NewFile-" + UUID.randomUUID().toString
 
 }
