@@ -13,5 +13,5 @@ case class CallSiteInfo(
 object CallSiteInfo {
   import language.experimental.macros
 
-  implicit def callSite: CallSiteInfo = macro CallSiteMacro.callSiteImpl
+  implicit def callSiteInfo: CallSiteInfo = macro CallSiteMacro.callSiteImpl
 }
