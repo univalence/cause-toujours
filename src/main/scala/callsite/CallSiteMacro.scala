@@ -36,7 +36,7 @@ object CallSiteMacro {
     val owner: c.universe.Symbol = enclosingType(c.internal.enclosingOwner)
 
     c.Expr[CallSiteInfo](
-      q"""CallSiteInfo(
+      q"""callsite.CallSiteInfo(
   enclosingClass = ${owner.fullName},
   file           = ${pathToRepoRoot(sourceFile)},
   line           = ${enclosingPosition.line},
