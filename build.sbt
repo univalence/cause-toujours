@@ -43,7 +43,7 @@ lazy val metadataSettings =
     organizationName     := "Univalence",
     organizationHomepage := Some(url("http://univalence.io/")),
     // -- Project
-    version     := "0.1.1-SNAPSHOT",
+    version     := "0.2.0-SNAPSHOT",
     description := "Cause-toujours is a microframework that gathers information about code location",
     startYear   := Some(2018),
     licenses    += ("Apache-2.0" → new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
