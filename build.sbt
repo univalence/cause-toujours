@@ -5,7 +5,7 @@ lazy val core =
     .settings(
       name := "cause-toujours",
       // -- Project
-      version     := "0.2.0-SNAPSHOT",
+      version     := "0.2.0",
       description := "Cause-toujours is a microframework that gathers information about code location",
       startYear   := Some(2018),
       licenses    += ("Apache-2.0" → new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
