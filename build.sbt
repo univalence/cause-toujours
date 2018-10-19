@@ -3,7 +3,13 @@ lazy val core =
   (project in file("core"))
     .settings(commonSettings, publishSettings)
     .settings(
-      name := "cause-toujours"
+      name := "cause-toujours",
+      // -- Project
+      version     := "0.2.0-SNAPSHOT",
+      description := "Cause-toujours is a microframework that gathers information about code location",
+      startYear   := Some(2018),
+      licenses    += ("Apache-2.0" → new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
+      homepage    := Some(url("https://github.com/UNIVALENCE/cause-toujours"))
     )
     .settings(
       libraryDependencies ++= Seq(
@@ -19,7 +25,7 @@ lazy val core =
 
 lazy val integration =
   (project in file("integration"))
-    .settings(commonSettings)
+    .settings(commonSettings, doNotPublishSettings)
     .settings(
       name := "cause-toujours-integration"
     )
@@ -35,6 +41,7 @@ lazy val integration =
 lazy val root =
   (project in file("."))
     .aggregate(core, integration)
+    .settings(doNotPublishSettings)
 
 lazy val metadataSettings =
   Def.settings(
@@ -42,12 +49,6 @@ lazy val metadataSettings =
     organization         := "io.univalence",
     organizationName     := "Univalence",
     organizationHomepage := Some(url("http://univalence.io/")),
-    // -- Project
-    version     := "0.2.0-SNAPSHOT",
-    description := "Cause-toujours is a microframework that gathers information about code location",
-    startYear   := Some(2018),
-    licenses    += ("Apache-2.0" → new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
-    homepage    := Some(url("https://github.com/UNIVALENCE/cause-toujours")),
     // -- Contributors
     developers := List(
       Developer(
@@ -133,6 +134,13 @@ lazy val publishSettings =
     // -- Settings meant for deployment on oss.sonatype.org
     publishTo := sonatypePublishTo.value,
     useGpg    := true
+  )
+
+lazy val doNotPublishSettings =
+  Def.settings(
+    publishArtifact := false,
+    // cf. https://github.com/sbt/sbt/issues/3136#issuecomment-296817619
+    skip in publish := true
   )
 
 lazy val commonSettings =
