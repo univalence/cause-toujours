@@ -1,8 +1,6 @@
-package callsite.implicittest
-
 //NO IMPORT
 
-object ImplicitTest {
+object ImplicitCompilationTest {
 
   def testCallSite(implicit cs: callsite.CallSiteInfo): Unit = {}
 
@@ -13,7 +11,7 @@ object ImplicitTest {
   testPosition
 }
 
-object OtherTest {
+object ValueAssignmentCompilationTest {
 
   val x = callsite.CallSiteInfo.callSiteInfo
 

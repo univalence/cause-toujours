@@ -1,4 +1,4 @@
-package callsite.nodeinfo
+package callsite.node
 
 import java.lang.management.ManagementFactory
 

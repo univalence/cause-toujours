@@ -7,7 +7,7 @@ import scala.reflect.macros.blackbox
 
 object CallSiteMacro {
 
-  import GitTools._
+  import callsite.util.GitTools._
 
   lazy val buildAt: Long = System.currentTimeMillis()
 

@@ -1,4 +1,4 @@
-package callsite.nodeinfo
+package callsite.node
 
 import org.scalatest.{FunSuiteLike, Matchers}
 
@@ -8,7 +8,7 @@ class NodeInfoTest extends FunSuiteLike with Matchers {
     val nodeInfo = NodeInfo.nodeInfo
 
     // IPv4 regex is based on defintion in https://www.ietf.org/rfc/rfc3986.txt
-    val result = nodeInfo.nodeInfoNetworkInterfaces
+    val result = nodeInfo.networkInterfaces
       .map(x ⇒ x.hostAddress.matches("^(\\d+\\.){3}\\d+$"))
 
     result should contain only true
@@ -16,7 +16,7 @@ class NodeInfoTest extends FunSuiteLike with Matchers {
 
   test("validate the returned hardware addresses") {
     val nodeInfo = NodeInfo.nodeInfo
-    val result = nodeInfo.nodeInfoNetworkInterfaces
+    val result = nodeInfo.networkInterfaces
       .map(x ⇒ x.hardwareAddress.isDefined)
 
     result should contain only true

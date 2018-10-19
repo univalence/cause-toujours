@@ -1,5 +1,4 @@
-package callsite
-
+package callsite.util
 import java.io.{File, FileInputStream}
 
 import org.eclipse.jgit.api.Git

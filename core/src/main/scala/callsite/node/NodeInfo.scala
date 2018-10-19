@@ -1,13 +1,13 @@
-package callsite.nodeinfo
+package callsite.node
 
 import java.net._
 
 import scala.collection.JavaConverters._
 
 case class NodeInfo(
-    nodeInfoNetworkInterfaces: List[NodeInfoNetworkInterface],
-    nodeInfoOS: NodeInfoOS,
-    nodeInfoRuntime: NodeInfoRuntime
+    networkInterfaces: List[NodeInfoNetworkInterface],
+    infoOS: NodeInfoOS,
+    infoRuntime: NodeInfoRuntime
 )
 
 object NodeInfo {
@@ -21,9 +21,9 @@ object NodeInfo {
         .map(NodeInfoNetworkInterface.fromNetworkInterface)
 
     NodeInfo(
-      nodeInfoNetworkInterfaces = networkInterfaceList,
-      nodeInfoOS                = NodeInfoOS.nodeInfoOS,
-      nodeInfoRuntime           = NodeInfoRuntime.nodeInfoRuntime
+      networkInterfaces = networkInterfaceList,
+      infoOS            = NodeInfoOS.nodeInfoOS,
+      infoRuntime       = NodeInfoRuntime.nodeInfoRuntime
     )
   }
 

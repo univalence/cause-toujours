@@ -1,7 +1,10 @@
 // -- Main project settings
-lazy val causeToujoursCore =
+lazy val core =
   (project in file("core"))
     .settings(commonSettings, publishSettings)
+    .settings(
+      name := "cause-toujours"
+    )
     .settings(
       libraryDependencies ++= Seq(
         "org.scala-lang"   % "scala-reflect"    % scalaVersion.value,
@@ -14,9 +17,12 @@ lazy val causeToujoursCore =
       )
     )
 
-lazy val causeToujoursIntegration =
+lazy val integration =
   (project in file("integration"))
     .settings(commonSettings)
+    .settings(
+      name := "cause-toujours-integration",
+    )
     .settings(
       libraryDependencies ++= Seq(
         "org.scalatest"    %% "scalatest"       % "3.0.5"                % Test,
@@ -24,11 +30,11 @@ lazy val causeToujoursIntegration =
         "org.eclipse.jgit" % "org.eclipse.jgit" % "5.0.2.201807311906-r" % Test
       )
     )
-//    .dependsOn(causeToujoursCore)
+    .dependsOn(core)
 
 lazy val root =
   (project in file("."))
-    .aggregate(causeToujoursCore, causeToujoursIntegration)
+    .aggregate(core, integration)
 
 lazy val metadataSettings =
   Def.settings(
@@ -37,7 +43,6 @@ lazy val metadataSettings =
     organizationName     := "Univalence",
     organizationHomepage := Some(url("http://univalence.io/")),
     // -- Project
-    name        := "cause-toujours",
     version     := "0.1.1-SNAPSHOT",
     description := "Cause-toujours is a microframework that gathers information about code location",
     startYear   := Some(2018),

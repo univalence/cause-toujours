@@ -1,5 +1,3 @@
-package callsite
-
 import java.io.File
 
 import callsite.util.GitTools
@@ -7,19 +5,17 @@ import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.lib.Constants
 import org.scalatest.{FunSuiteLike, Matchers}
 
-class CallSiteMacroTest extends FunSuiteLike with Matchers {
+class CallSiteMacroIntegrationTest extends FunSuiteLike with Matchers {
+
+  import callsite.CallSiteMacro.buildAt
 
   test("should have builtAt lower or equal to the current time") {
-    import CallSiteMacro.buildAt
-
     buildAt should be <= System.currentTimeMillis()
   }
 
   test("should get call site information") {
-    import CallSiteMacro.buildAt
-
-    val csi: CallSiteInfo = implicitly[CallSiteInfo]
-    val git: Git          = GitTools.getGit(new File(".")).get
+    val csi      = implicitly[callsite.CallSiteInfo]
+    val git: Git = GitTools.getGit(new File(".")).get
 
     csi should have(
       'enclosingClass (getClass.getCanonicalName),
@@ -28,6 +24,12 @@ class CallSiteMacroTest extends FunSuiteLike with Matchers {
 
     csi.file should endWith(getClass.getSimpleName + ".scala")
     csi.buildAt should be <= buildAt
+  }
+
+  test("should get the filename from implicit callsite") {
+    def getFilename(implicit csi: callsite.CallSiteInfo): String = csi.file
+
+    getFilename should endWith(getClass.getSimpleName + ".scala")
   }
 
 }

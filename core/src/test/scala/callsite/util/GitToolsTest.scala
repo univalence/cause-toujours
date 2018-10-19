@@ -1,4 +1,4 @@
-package callsite
+package callsite.util
 
 import java.io.File
 import java.nio.charset.StandardCharsets
@@ -11,7 +11,7 @@ import org.scalatest.{FunSuiteLike, Matchers}
 
 class GitToolsTest extends FunSuiteLike with Matchers {
 
-  import GitTools._
+  import callsite.util.GitTools._
 
   val root: Path = Files.createTempDirectory("testGit")
   val git: Git   = Git.init().setDirectory(root.toFile).call()

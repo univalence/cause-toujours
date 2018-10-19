@@ -1,4 +1,4 @@
-package callsite.nodeinfo
+package callsite.node
 
 import java.net.{Inet4Address, Inet6Address, InetAddress, NetworkInterface}
 
