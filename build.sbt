@@ -21,7 +21,7 @@ lazy val integration =
   (project in file("integration"))
     .settings(commonSettings)
     .settings(
-      name := "cause-toujours-integration",
+      name := "cause-toujours-integration"
     )
     .settings(
       libraryDependencies ++= Seq(
