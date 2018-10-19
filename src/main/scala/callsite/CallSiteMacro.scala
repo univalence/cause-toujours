@@ -37,13 +37,14 @@ object CallSiteMacro {
 
     c.Expr[CallSiteInfo](
       q"""callsite.CallSiteInfo(
-  ${owner.fullName},
-  ${pathToRepoRoot(sourceFile)},
-  ${enclosingPosition.line},
-  ${lastCommitIdOf(sourceFile)},
-  $buildAt,
-  ${isClean(sourceFile)},
-  $source
+  enclosingClass = ${owner.fullName},
+  file           = ${pathToRepoRoot(sourceFile)},
+  line           = ${enclosingPosition.line},
+  commit         = ${lastCommitIdOf(sourceFile)},
+  buildAt        = $buildAt,
+  status         = ${fileStatus(sourceFile).toString.toLowerCase()},
+  fingerprint    = ${hashObject(sourceFile)},
+  fileContent    = $source
 )"""
     )
   }
