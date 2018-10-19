@@ -8,14 +8,16 @@ import org.scalatest.{FunSuiteLike, Matchers}
 
 class CallSiteMacroTest extends FunSuiteLike with Matchers {
 
-  import CallSiteMacro._
-  import CallSiteInfo._
-
   test("should have builtAt lower or equal to the current time") {
+    import CallSiteMacro.buildAt
+
     buildAt should be <= System.currentTimeMillis()
   }
 
   test("should get call site information") {
+    import CallSiteMacro.buildAt
+    import CallSiteInfo.callSite
+
     val csi: CallSiteInfo = implicitly[CallSiteInfo]
     val git: Git          = GitTools.getGit(new File(".")).get
 
@@ -27,4 +29,5 @@ class CallSiteMacroTest extends FunSuiteLike with Matchers {
     csi.file should endWith(getClass.getSimpleName + ".scala")
     csi.buildAt should be <= buildAt
   }
+
 }

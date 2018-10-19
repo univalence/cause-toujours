@@ -1,6 +1,6 @@
 // -- Main project settings
-lazy val causeToujours =
-  (project in file("."))
+lazy val causeToujoursCore =
+  (project in file("core"))
     .settings(commonSettings, publishSettings)
     .settings(
       libraryDependencies ++= Seq(
@@ -13,6 +13,22 @@ lazy val causeToujours =
         "org.slf4j"     % "slf4j-simple" % "1.7.25" % Test
       )
     )
+
+lazy val causeToujoursIntegration =
+  (project in file("integration"))
+    .settings(commonSettings)
+    .settings(
+      libraryDependencies ++= Seq(
+        "org.scalatest"    %% "scalatest"       % "3.0.5"                % Test,
+        "org.slf4j"        % "slf4j-simple"     % "1.7.25"               % Test,
+        "org.eclipse.jgit" % "org.eclipse.jgit" % "5.0.2.201807311906-r" % Test
+      )
+    )
+//    .dependsOn(causeToujoursCore)
+
+lazy val root =
+  (project in file("."))
+    .aggregate(causeToujoursCore, causeToujoursIntegration)
 
 lazy val metadataSettings =
   Def.settings(
