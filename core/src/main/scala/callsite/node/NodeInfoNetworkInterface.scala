@@ -21,16 +21,16 @@ object NodeInfoNetworkInterface {
     val interfaces = networkInterface.getInetAddresses.asScala.toList
 
     val localHost: InetAddress =
-      interfaces.find(iNetAddress ⇒ iNetAddress.isSiteLocalAddress && iNetAddress.isInstanceOf[Inet4Address]).get
+      interfaces.find(iNetAddress => iNetAddress.isSiteLocalAddress && iNetAddress.isInstanceOf[Inet4Address]).get
 
     val ipv6Address: Option[InetAddress] =
-      interfaces.find(iNetAddress ⇒ iNetAddress.isInstanceOf[Inet6Address])
+      interfaces.find(iNetAddress => iNetAddress.isInstanceOf[Inet6Address])
 
     val ipv6HostAddress =
-      ipv6Address.flatMap(i ⇒ Option(i.getHostAddress.substring(0, i.getHostAddress.indexOf('%'))))
+      ipv6Address.flatMap(i => Option(i.getHostAddress.substring(0, i.getHostAddress.indexOf('%'))))
 
     val hardwareAddress =
-      Option(networkInterface.getHardwareAddress).flatMap(ha ⇒ Option(ha.map("%02x" format _).mkString(":")))
+      Option(networkInterface.getHardwareAddress).flatMap(ha => Option(ha.map("%02x" format _).mkString(":")))
 
     NodeInfoNetworkInterface(
       hostName                    = localHost.getHostName,

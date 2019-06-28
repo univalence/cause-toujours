@@ -16,7 +16,7 @@ object NodeInfo {
     val networkInterfaceList =
       NetworkInterface.getNetworkInterfaces.asScala.toList
         .flatMap(_.getInetAddresses.asScala.toList
-          .filter(a ⇒ !(a.isLinkLocalAddress || a.isLoopbackAddress)))
+          .filter(a => !(a.isLinkLocalAddress || a.isLoopbackAddress)))
         .map(NetworkInterface.getByInetAddress)
         .map(NodeInfoNetworkInterface.fromNetworkInterface)
 

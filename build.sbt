@@ -1,3 +1,9 @@
+val libVersion = new {
+  val scalatest = "3.0.8"
+  val slf4j     = "1.7.25"
+  val jgit      = "5.0.2.201807311906-r"
+}
+
 // -- Main project settings
 lazy val core =
   (project in file("core"))
@@ -14,12 +20,12 @@ lazy val core =
     .settings(
       libraryDependencies ++= Seq(
         "org.scala-lang"   % "scala-reflect"    % scalaVersion.value,
-        "org.eclipse.jgit" % "org.eclipse.jgit" % "5.0.2.201807311906-r"
+        "org.eclipse.jgit" % "org.eclipse.jgit" % libVersion.jgit
       ),
       // -- Test dependencies
       libraryDependencies ++= Seq(
-        "org.scalatest" %% "scalatest"   % "3.0.5"  % Test,
-        "org.slf4j"     % "slf4j-simple" % "1.7.25" % Test
+        "org.scalatest" %% "scalatest"   % libVersion.scalatest % Test,
+        "org.slf4j"     % "slf4j-simple" % libVersion.slf4j     % Test
       )
     )
 
@@ -31,14 +37,14 @@ lazy val integration =
     )
     .settings(
       libraryDependencies ++= Seq(
-        "org.scalatest"    %% "scalatest"       % "3.0.5"                % Test,
-        "org.slf4j"        % "slf4j-simple"     % "1.7.25"               % Test,
-        "org.eclipse.jgit" % "org.eclipse.jgit" % "5.0.2.201807311906-r" % Test
+        "org.scalatest"    %% "scalatest"       % libVersion.scalatest % Test,
+        "org.slf4j"        % "slf4j-simple"     % libVersion.slf4j     % Test,
+        "org.eclipse.jgit" % "org.eclipse.jgit" % libVersion.jgit      % Test
       )
     )
     .dependsOn(core)
 
-lazy val root =
+lazy val causeToujours =
   (project in file("."))
     .aggregate(core, integration)
     .settings(doNotPublishSettings)
@@ -86,8 +92,8 @@ lazy val metadataSettings =
 
 lazy val scalaSettings =
   Def.settings(
-    crossScalaVersions := Seq("2.11.12", "2.12.6"),
-    scalaVersion       := crossScalaVersions.value.find(_.startsWith("2.12")).get,
+    crossScalaVersions := Seq("2.11.12", "2.12.8", "2.13.0"),
+    scalaVersion       := crossScalaVersions.value.find(_.startsWith("2.13")).get,
     scalacOptions :=
       Opts.compile.encoding("utf-8") // Specify character encoding used by source files (linked to the previous item).
         ++ Seq(
@@ -100,10 +106,10 @@ lazy val scalaSettings =
           "-language:higherKinds", // Allow higher-kinded types
           "-language:implicitConversions", // Allow definition of implicit functions called views
           "-Xcheckinit", // Wrap field accessors to throw an exception on uninitialized access.
-          "-Xfatal-warnings", // Fail the compilation if there are any warnings.
-          "-Xfuture", // Turn on future language features.
+//          "-Xfatal-warnings", // Fail the compilation if there are any warnings.
+//          "-Xfuture", // Turn on future language features.
           "-Xlint:adapted-args", // Warn if an argument list is modified to match the receiver.
-          "-Xlint:by-name-right-associative", // By-name parameter of right associative operator.
+//          "-Xlint:by-name-right-associative", // By-name parameter of right associative operator.
           "-Xlint:delayedinit-select", // Selecting member of DelayedInit.
           "-Xlint:doc-detached", // A Scaladoc comment appears to be detached from its element.
           "-Xlint:inaccessible", // Warn about inaccessible types in method signatures.
@@ -116,16 +122,16 @@ lazy val scalaSettings =
           "-Xlint:poly-implicit-overload", // Parameterized overloaded implicit methods are not visible as view bounds.
           "-Xlint:private-shadow", // A private field (or class parameter) shadows a superclass field.
           "-Xlint:stars-align", // Pattern sequence wildcard must align with sequence component.
-          "-Xlint:type-parameter-shadow", // A local type parameter shadows a type already in scope.
-          "-Xlint:unsound-match", // Pattern match may not be typesafe.
-          "-Yno-adapted-args", // Do not adapt an argument list (either by inserting () or creating a tuple) to match the receiver.
-          "-Ypartial-unification", // Enable partial unification in type constructor inference
-          "-Ywarn-dead-code", // Warn when dead code is identified.
-          "-Ywarn-inaccessible", // Warn about inaccessible types in method signatures.
-          "-Ywarn-infer-any", // Warn when a type argument is inferred to be `Any`.
-          "-Ywarn-nullary-override", // Warn when non-nullary `def f()' overrides nullary `def f'.
-          "-Ywarn-nullary-unit", // Warn when nullary methods return Unit.
-          "-Ywarn-numeric-widen" // Warn when numerics are widened.
+          "-Xlint:type-parameter-shadow" // A local type parameter shadows a type already in scope.
+//          "-Xlint:unsound-match", // Pattern match may not be typesafe.
+//          "-Yno-adapted-args", // Do not adapt an argument list (either by inserting () or creating a tuple) to match the receiver.
+//          "-Ypartial-unification", // Enable partial unification in type constructor inference
+//          "-Ywarn-dead-code", // Warn when dead code is identified.
+//          "-Ywarn-inaccessible", // Warn about inaccessible types in method signatures.
+//          "-Ywarn-infer-any", // Warn when a type argument is inferred to be `Any`.
+//          "-Ywarn-nullary-override", // Warn when non-nullary `def f()' overrides nullary `def f'.
+//          "-Ywarn-nullary-unit", // Warn when nullary methods return Unit.
+//          "-Ywarn-numeric-widen" // Warn when numerics are widened.
         )
   )
 
@@ -149,7 +155,5 @@ lazy val commonSettings =
     scalaSettings
   ) ++
     Def.settings(
-      parallelExecution                  := false,
-      scalafmtOnCompile in ThisBuild     := true,
-      scalafmtTestOnCompile in ThisBuild := true
+      parallelExecution := false
     )

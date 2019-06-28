@@ -1,6 +1,6 @@
 package callsite.container
 
-import java.nio.file.{Path ⇒ JPath}
+import java.nio.file.{Path => JPath}
 
 import scala.io.Source.fromFile
 import scala.reflect.io.Path

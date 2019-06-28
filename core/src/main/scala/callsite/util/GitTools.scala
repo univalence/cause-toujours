@@ -33,25 +33,25 @@ object GitTools {
 
   def isTracked(file: File): Boolean =
     (for {
-      git  ← getGit(file)
-      path ← pathInGit(file, git)
+      git  <- getGit(file)
+      path <- pathInGit(file, git)
     } yield git.status().addPath(path).call().getUntracked.isEmpty).getOrElse(false)
 
   def isClean(file: File): Boolean =
     (for {
-      git  ← getGit(file)
-      path ← pathInGit(file, git)
+      git  <- getGit(file)
+      path <- pathInGit(file, git)
     } yield git.status().addPath(path).call().isClean).getOrElse(false)
 
   def lastCommitIdOf(file: File): String =
     getGit(file)
-      .flatMap(g ⇒ Option(g.getRepository.resolve(Constants.HEAD)))
+      .flatMap(g => Option(g.getRepository.resolve(Constants.HEAD)))
       .map(_.getName)
       .getOrElse("")
 
   def pathToRepoRoot(file: File): String =
     getGit(file)
-      .flatMap(git ⇒ pathInGit(file, git))
+      .flatMap(git => pathInGit(file, git))
       .getOrElse(file.getPath)
 
   def hashObject(file: File): String = {

@@ -22,8 +22,8 @@ class CallSiteMacroTest extends FunSuiteLike with Matchers {
     val git: Git          = GitTools.getGit(new File(".")).get
 
     csi should have(
-      'enclosingClass (getClass.getCanonicalName),
-      'commit (git.getRepository.resolve(Constants.HEAD).getName)
+      Symbol("enclosingClass") (getClass.getCanonicalName),
+      Symbol("commit") (git.getRepository.resolve(Constants.HEAD).getName)
     )
 
     csi.file should endWith(getClass.getSimpleName + ".scala")
