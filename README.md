@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/UNIVALENCE/cause-toujours.svg?branch=master)](https://travis-ci.org/UNIVALENCE/cause-toujours)
-[![codecov](https://codecov.io/gh/UNIVALENCE/cause-toujours/branch/master/graph/badge.svg)](https://codecov.io/gh/UNIVALENCE/cause-toujours)
-[![CircleCI](https://circleci.com/gh/UNIVALENCE/cause-toujours/tree/master.svg?style=svg)](https://circleci.com/gh/UNIVALENCE/cause-toujours/tree/master)
+[![Build Status](https://travis-ci.org/univalence/cause-toujours.svg?branch=master)](https://travis-ci.org/univalence/cause-toujours)
+[![codecov](https://codecov.io/gh/univalence/cause-toujours/branch/master/graph/badge.svg)](https://codecov.io/gh/univalence/cause-toujours)
+[![CircleCI](https://circleci.com/gh/univalence/cause-toujours/tree/master.svg?style=svg)](https://circleci.com/gh/univalence/cause-toujours/tree/master)
 
 # Cause-toujours
 
